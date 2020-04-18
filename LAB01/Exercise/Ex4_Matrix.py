@@ -77,6 +77,7 @@ Neigh([0,0])
 # %% [markdown]
 # BFS
 def bfs(Map_Matrix, Start, destination, max_distance, m, n):
+    # create gas map
     Gas_Map = np.empty((m,n,))
     Gas_Map[:] = np.nan
 
@@ -88,7 +89,7 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
     
     while queue:
         
-
+        #  initialize gas
         if Map_Matrix[Start[0], Start[1]] == 1:
             Gas_Map[Start[0], Start[1]] = max_distance
             Gas = max_distance
@@ -96,21 +97,26 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
         Result = queue.pop(0)
         print(Result, end=" ")
 
+        # find the path
+        # if the result can not find the destination
         if Result != destination:
+            # find the neighbour of the node and add to queue
             for Neighbour in Neigh(Result):
                 if Neighbour not in visited:
                     Gas = Gas_Map[Result[0], Result[1]]
                     
+                    # if the node is the island -> refresh gas
                     if Map_Matrix[Result[0], Result[1]] == 3:
                         Gas = max_distance
-                        Gas_Map[Neighbour[0], Neighbour[1]] == max_distance
+                        Gas_Map[Neighbour[0], Neighbour[1]] = max_distance
                     
-                    
+                    # if gas is still in the can:
                     if Gas > 0:
-
+                        # if the neighbour node is an island
                         if Map_Matrix[Neighbour[0], Neighbour[1]] == 3:
                             Gas = max_distance
                             Gas_Map[Neighbour[0], Neighbour[1]] = Gas  
+                        # if the neighbour node is not an island
                         else:
                             Gas -= 1
                             Gas_Map[Neighbour[0], Neighbour[1]] = Gas
@@ -124,6 +130,8 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
 
         else:
             break
+    if D2 not in visited:
+        print("can not find the path to the destination")
     return Gas_Map
 
 
