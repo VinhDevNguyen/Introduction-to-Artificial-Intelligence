@@ -76,24 +76,40 @@ Neigh([0,0])
 
 # %% [markdown]
 # BFS
-def bfs(Map_Matrix, node):
+def bfs(Map_Matrix, Start, destination, max_distance, m, n):
+    Gas_Map = np.empty((m,n,))
+    Gas_Map[:] = np.nan
+
     visited = [] # Array to keep track of visited nodes.
     queue = [] # Initialize a queue
-    visited.append(node)
-    queue.append(node)
+
+    visited.append(Start)
+    queue.append(Start)
     
     while queue:
+        
+
+        if Map_Matrix[Start[0], Start[1]] == 1 or Map_Matrix[Start[0], Start[1]] == 3:
+            Gas_Map[Start[0], Start[1]] = max_distance
+            Gas = max_distance
+            
         Result = queue.pop(0)
         print(Result, end=" ")
 
-        for Neighbour in Neigh(Result):
-            if Neighbour not in visited:
-                visited.append(Neighbour)
-                queue.append(Neighbour)
-
+        if Result != destination:
+            for Neighbour in Neigh(Result):
+                if Neighbour not in visited:
+                    Gas = Gas_Map[Result[0], Result[1]]
+                    Gas -= 1
+                    Gas_Map[Neighbour[0], Neighbour[1]] = Gas
+                    visited.append(Neighbour)
+                    queue.append(Neighbour)
+        else:
+            break
+    return Gas_Map
 
 
 # %%
-bfs(Map_Matrix, D1)
+bfs(Map_Matrix, D1, D2, max_distance, m, n)
 
 # %%
