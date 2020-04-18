@@ -4,14 +4,11 @@
 from collections import defaultdict
 
 class Graph: 
-    # def __init__(self,vertices): 
-    #     # No. of vertices 
-    #     self.V = vertices 
-    #     # default dictionary to store graph 
-    #     self.graph = defaultdict(list) 
-
-    def __init__(self):
-        self.graph = defaultdict(list)
+    def __init__(self,vertices): 
+        # No. of vertices 
+        self.V = vertices 
+        # default dictionary to store graph 
+        self.graph = defaultdict(list) 
 
     # function to add an edge to graph 
     def addEdge(self,u,v): 
@@ -63,8 +60,7 @@ class Graph:
 #     'F' : []
 # }
 # Sample graph 1
-# g = Graph(6)
-g = Graph()
+g = Graph(6)
 g.addEdge('A','B')
 g.addEdge('A','C')
 g.addEdge('C','F')

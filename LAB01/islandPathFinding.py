@@ -1,5 +1,5 @@
 # Input from file like this: 
-# - 1st line: matrix  size 
+# - 1st line: matrix  size (probably not going to use) 
 # - 2nd line: initial start coordinate 
 # - 3rd line: goal coordinate
 # - 4rd line: tank compacity of the boat 
@@ -73,28 +73,36 @@ def nextValidMove(currCoord, matrixMap):
            move[idx] = None 
     return move # Return list valid coordinate of the next move
 
-
+def isReFuel(currCoord, matrixMap): 
+    # currCoord is arr, receive current coordinate  
+    if matrixMap[currCoord[0]][currCoord[1]] == 2: 
+        return True 
+    return False
 
 # Main algorithm of exercise
 # REMEMBER TO INSTALL anytree library 
-from anytree import Node, RenderTree
+from anytree import Node, RenderTree, PreOrderIter
 def dfs(initialCoordinate, goalCoordinate, distance, matrixMap): 
-    # Create graph to traversal 
-    graph = Node(initialCoordinate) 
+    # Create intialize graph for traversal 
+    graph = Node(initialCoordinate,parent=None,fuelLeft=distance[0]) 
     nextMove = nextValidMove(initialCoordinate,matrixMap)
+    # For every move, distance decrease by 1
+    nodeDistance = distance[0] - 1 
     for ele in nextMove: 
-        if ele != None: 
-           Node(ele,parent = graph) 
-
+        if ele != None:
+            if isReFuel(ele,matrixMap) == True: 
+                Node(ele,parent=graph,children=None,fuelLeft=nodeDistance+distance[0]) 
+            else:  
+                Node(ele,parent=graph,children=None,fuelLeft=nodeDistance) 
+    # Expansion based on current coordianate  
+    # Expansion based on pre-order iterations  
+    # print([node.name for node in PreOrderIter(graph)])
+    # for node in PreOrderIter(graph): 
+    
     # Render the graph
-    for pre, fill, node in RenderTree(graph):
-        print("%s%s" % (pre, node.name))
-
-    del graph.children()
-    for pre, fill, node in RenderTree(graph):
-        print("%s%s" % (pre, node.name))
-
-
+    # print(RenderTree(graph.children))
+    # print(graph.children[0])
+    # print(RenderTree(graph))
 
 dfs(startCoordinate,destCoordinate,distance,matrixMap)
 
