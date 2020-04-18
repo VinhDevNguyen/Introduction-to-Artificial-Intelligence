@@ -28,38 +28,72 @@ for i in range(m):
 
 # %% [markdown]
 # Find Neigbor
-Neigh_List = []
-try:
-    Map_Matrix[D1[0]+1, D1[1]]
-except IndexError as e:
-    print("Ngoai matrix")
-else:
-    print(D1[0]+1, D1[1])
-    Neigh_List.append([D1[0]+1, D1[1]])
+def Neigh(node):
+    Neigh_List = []
+    try:
+        Map_Matrix[node[0]+1, node[1]]
+    except IndexError as e:
+        pass
+    else:
+        if node[0] + 1 >= 0:
+            Neigh_List.append([node[0] + 1, node[1]])
+        else:
+            pass
+
+    try:
+        Map_Matrix[node[0]-1, node[1]]
+    except IndexError as e:
+        pass
+    else:
+        if node[0] - 1 >= 0:
+            Neigh_List.append([node[0] - 1, node[1]])
+        else:
+            pass
+
+    try:
+        Map_Matrix[node[0], node[1] + 1]
+    except IndexError as e:
+        pass
+    else:
+        if node[1] + 1 >= 0:
+            Neigh_List.append([node[0], node[1] + 1])
+        else:
+            pass
+
+    try:
+        Map_Matrix[node[0], node[1] - 1]
+    except IndexError as e:
+        pass
+    else:
+        if node[1] - 1 >= 0:
+            Neigh_List.append([node[0], node[1] - 1])
+        else:
+            pass
+
+    return Neigh_List
 # %%
-try:
-    Map_Matrix[D1[0]-1, D1[1]]
-except IndexError as e:
-    print("Ngoai matrix")
-else:
-    print(D1[0]-1, D1[1])
-    Neigh_List.append([D1[0]-1, D1[1]])
-# %%
-try:
-    Map_Matrix[D1[0], D1[1]+1]
-except IndexError as e:
-    print("Ngoai matrix")
-else:
-    print(D1[0], D1[1]+1)
-    Neigh_List.append([D1[0], D1[1]+1])
+Neigh([0,0])
+
+# %% [markdown]
+# BFS
+def bfs(Map_Matrix, node):
+    visited = [] # Array to keep track of visited nodes.
+    queue = [] # Initialize a queue
+    visited.append(node)
+    queue.append(node)
+    
+    while queue:
+        Result = queue.pop(0)
+        print(Result, end=" ")
+
+        for Neighbour in Neigh(Result):
+            if Neighbour not in visited:
+                visited.append(Neighbour)
+                queue.append(Neighbour)
+
+
 
 # %%
-try:
-    Map_Matrix[D1[0], D1[1]-1]
-except IndexError as e:
-    print("Ngoai matrix")
-else:
-    print(D1[0], D1[1]-1)
-    Neigh_List.append([D1[0], D1[1]-1])
+bfs(Map_Matrix, D1)
 
 # %%
