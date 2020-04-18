@@ -77,6 +77,8 @@ Neigh([0,0])
 # %% [markdown]
 # BFS
 def bfs(Map_Matrix, Start, destination, max_distance, m, n):
+    from anytree import Node, RenderTree
+    
     # create gas map
     Gas_Map = np.empty((m,n,))
     Gas_Map[:] = np.nan
@@ -86,6 +88,18 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
 
     visited.append(Start)
     queue.append(Start)
+    
+    # Create intialize graph for traversal 
+    root = Node(Start ,parent = None,fuelLeft = max_distance)
+    nextMove = Neigh(Start)
+    # # For every move, distance decrease by 1
+    # nodeDistance = max_distance - 1 
+    # for ele in nextMove: 
+    #     if ele != None:
+    #         if isReFuel(ele,matrixMap) == True: 
+    #             Node(ele,parent=root,children=None,fuelLeft=nodeDistance+distance[0]) 
+    #         else:
+    #             Node(ele,parent=root,children=None,fuelLeft=nodeDistance)
     
     while queue:
         
@@ -109,7 +123,7 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
                     if Map_Matrix[Result[0], Result[1]] == 3:
                         Gas = max_distance
                         Gas_Map[Neighbour[0], Neighbour[1]] = max_distance
-                    
+                        # Node(Neighbour, parent = root, children = None, fuelLeft = Gas)
                     # if gas is still in the can:
                     if Gas > 0:
                         # if the neighbour node is an island
@@ -120,9 +134,11 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
                         else:
                             Gas -= 1
                             Gas_Map[Neighbour[0], Neighbour[1]] = Gas
-                         
+                            # Node(Neighbour, parent = Result, children = None, fuelLeft = Gas)
                         visited.append(Neighbour)
                         queue.append(Neighbour)
+                        
+                        Result_Node = Node(Result, parent = root, children = None, fuelLeft = Gas)
                     else:
                         pass
                 
@@ -132,6 +148,7 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
             break
     if D2 not in visited:
         print("can not find the path to the destination")
+    print(RenderTree(root))
     return Gas_Map
 
 
@@ -140,3 +157,5 @@ bfs(Map_Matrix, D1, D2, max_distance, m, n)
 
 # %%
 max_distance
+
+
