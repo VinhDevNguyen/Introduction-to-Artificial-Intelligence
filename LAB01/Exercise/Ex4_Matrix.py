@@ -89,7 +89,7 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
     while queue:
         
 
-        if Map_Matrix[Start[0], Start[1]] == 1 or Map_Matrix[Start[0], Start[1]] == 3:
+        if Map_Matrix[Start[0], Start[1]] == 1:
             Gas_Map[Start[0], Start[1]] = max_distance
             Gas = max_distance
             
@@ -100,10 +100,28 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
             for Neighbour in Neigh(Result):
                 if Neighbour not in visited:
                     Gas = Gas_Map[Result[0], Result[1]]
-                    Gas -= 1
-                    Gas_Map[Neighbour[0], Neighbour[1]] = Gas
-                    visited.append(Neighbour)
-                    queue.append(Neighbour)
+                    
+                    if Map_Matrix[Result[0], Result[1]] == 3:
+                        Gas = max_distance
+                        Gas_Map[Neighbour[0], Neighbour[1]] == max_distance
+                    
+                    
+                    if Gas > 0:
+
+                        if Map_Matrix[Neighbour[0], Neighbour[1]] == 3:
+                            Gas = max_distance
+                            Gas_Map[Neighbour[0], Neighbour[1]] = Gas  
+                        else:
+                            Gas -= 1
+                            Gas_Map[Neighbour[0], Neighbour[1]] = Gas
+                         
+                        visited.append(Neighbour)
+                        queue.append(Neighbour)
+                    else:
+                        pass
+                
+                        
+
         else:
             break
     return Gas_Map
@@ -113,3 +131,4 @@ def bfs(Map_Matrix, Start, destination, max_distance, m, n):
 bfs(Map_Matrix, D1, D2, max_distance, m, n)
 
 # %%
+max_distance
