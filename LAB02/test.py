@@ -28,21 +28,32 @@ def graphExpansion(graph):
         Node(node,parent=graph)
     # print(RenderTree(graph))
 
-    # level 2 
+    # level 2
+    track = [] # keep tracking nodes need to expand 
     for children in graph.children: 
         listNodes = nextExpandedNode(children)
         for node in listNodes: 
-            Node(node,parent=children)
-    # print([child for child in graph.children])
+            track.append(Node(node,parent=children))
 
-    print(graph.height)
-    print(RenderTree(graph))
+
+
+
+
+    print(track)
+    for node in track: 
+        print(node.name) 
+
+
+
+
+    # print([child for child in graph.children])
+    # print(graph.height)
+    # print(RenderTree(graph))
     # for children in graph.children: 
     # #     a = children.descendants
     #     print(children.descendants)
     # #     print(a.name)
-    f = graph.descendants 
-    print(f)
+
     # for children in LevelOrderGroupIter(graph.children): 
     #     for node in children: 
     #         print(node.name)
@@ -94,19 +105,20 @@ graphExpansion(graph)
 
 # graph = Node([3,3])
 # graphExpansion(graph)
-def nextExpandedNode(temp): 
-    listNode = [
-        [temp[0] - 1, temp[1] - 0],
-        [temp[0] - 0, temp[1] - 1],
-        [temp[0] - 1, temp[1] - 1],
-    ]
-    return listNode 
+
+# def nextExpandedNode(temp): 
+#     listNode = [
+#         [temp[0] - 1, temp[1] - 0],
+#         [temp[0] - 0, temp[1] - 1],
+#         [temp[0] - 1, temp[1] - 1],
+#     ]
+#     return listNode 
 
 
-def graphExpansion(root): 
-    listNodes = nextExpandedNode(root) 
-    root.append(listNodes)
-    print(root)
+# def graphExpansion(root): 
+#     listNodes = nextExpandedNode(root) 
+#     root.append(listNodes)
+#     print(root)
 
 
 

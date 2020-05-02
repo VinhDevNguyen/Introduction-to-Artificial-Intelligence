@@ -6,6 +6,27 @@
 # LIBRARIES 
 from anytree import RenderTree,Node
 
+class Node(): 
+    def __init__(self,data=None,children=[]): 
+        self.data = data 
+        self.children = children 
+
+    # def createChildren(self,amount): 
+        # for i in range(0,amount): 
+            # self.children.append(T)
+
+
+# class Tree(object): 
+#     def __init__(self):
+
+
+
+
+
+
+
+
+
 class MT: # Millionares and thieves  
     # check this function again about the constructor
     # it may cause problem because of init value 
