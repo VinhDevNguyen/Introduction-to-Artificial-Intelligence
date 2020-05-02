@@ -20,14 +20,13 @@ class Graph:
     # function to add an edge to graph 
     def addEdge(self,u,v): 
         self.graph[u].append(v) 
- 
-    def dfs(self, node):
-        visited = [] # Array to keep track of visited nodes.
+    Visited = [] # Array to keep track of visited nodes.
+    def dfs(self, node, visited= Visited):
         if node not in visited:
             print(node, end = " ")
             visited.append(node)
             for neighbour in self.graph[node]:
-                self.dfs(neighbour)
+                self.dfs(neighbour, visited)
 
 
 g = Graph(6)
