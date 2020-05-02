@@ -36,12 +36,13 @@ def graphExpansion(graph):
             track.append(Node(node,parent=children))
 
 
+    currNode = track[0].name 
+    Node(currNode, )
 
 
-
-    print(track)
-    for node in track: 
-        print(node.name) 
+    print(track[0].name)
+    # for node in track: 
+    #     print(node.name) 
 
 
 
