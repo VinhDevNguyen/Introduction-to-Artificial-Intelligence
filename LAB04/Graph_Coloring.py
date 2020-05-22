@@ -11,7 +11,7 @@ graph = {
     'C': ['A', 'D', 'F'],
     'D': ['A', 'B', 'E', 'F', 'C'],
     'E': ['B', 'D', 'F'],
-    'F': ['C', 'E', 'D']
+    'F': ['C', 'E']
     }
 
 # %%
@@ -26,12 +26,14 @@ for node in graph:
         if Neighbor in visited:
             if(visited[Neighbor] == visited[node] == colors[0]):
                 visited[node] = colors[1]
+                break
     for Neighbor in graph[node]:
-        if Neighbor in visited:     
+        if Neighbor in visited:
             if(visited[Neighbor] == visited[node] == colors[1]):
                 visited[node] = colors[2]
+                break
     for Neighbor in graph[node]:
-        if Neighbor in visited:     
+        if Neighbor in visited:
             if(visited[Neighbor] == visited[node] == colors[2]):
                 Status = False
                 break
