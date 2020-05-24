@@ -17,7 +17,7 @@ for i in range(table.shape[0]):
             break
         if(n > i):
             break
-        if i in Graph:
+        if str(i) in Graph:
             Graph[str(i)][str(n)] = table[i,n]
         else:
             Graph[str(i)] = {str(n): table[i,n]}
