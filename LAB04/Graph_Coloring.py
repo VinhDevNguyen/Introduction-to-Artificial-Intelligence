@@ -41,3 +41,6 @@ if Status:
         print(GColor.RGB(visited[element][0],visited[element][1],visited[element][2]),element, GColor.END)
 else:
     print("Can't solve!")
+
+
+# %%
