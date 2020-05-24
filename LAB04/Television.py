@@ -18,7 +18,7 @@ for i in range(table.shape[0]):
         if(n > i):
             break
         if i in Graph:
-            Graph[i].append((n,table[i,n]))
+            Graph[str(i)][str(n)] = table[i,n]
         else:
-            Graph[i] = [(n,table[i,n])]
+            Graph[str(i)] = {str(n): table[i,n]}
 
