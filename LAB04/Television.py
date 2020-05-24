@@ -22,3 +22,39 @@ for i in range(table.shape[0]):
         else:
             Graph[str(i)] = {str(n): table[i,n]}
 
+
+Graph_New = {}
+
+for dedicate in range(table.shape[0]):
+        for i in Graph:
+            if str(dedicate) in Graph[i]:
+                if str(dedicate) in Graph_New:
+                    Graph_New[str(dedicate)][str(i)] = Graph[i][str(dedicate)]
+                else:
+                    Graph_New[str(dedicate)] = {str(i): Graph[i][str(dedicate)]}
+
+def Merge(dict1, dict2): 
+    return(dict2.update(dict1)) 
+Merge(Graph,Graph_New)
+
+for node in Graph_New:
+    i = 0
+    if channel == []:
+        channel.append(ID)
+        ID = ID + 1
+    visited[node] = channel[i]
+    for Neighbor in Graph_New[node]:
+        for CheckID in range(len(channel)):
+            if Neighbor in visited: 
+                if(visited[Neighbor] ==  visited[node] == CheckID):
+                    i = CheckID
+                    if Graph_New[node][Neighbor] <= 150:
+                        i = i + 1
+                        if len(channel)-1 < i:
+                            channel.append(ID)
+                            ID = ID + 1
+                        visited[node] = channel[i]
+
+
+print(visited)
+
