@@ -1,9 +1,11 @@
 import numpy as np
 table = np.array([
-    [None, 85  , 175 , 200 ],
-    [85  , None, 125 , 175 ],
-    [172 , 125 , None, 100 ],
-    [200 , 175 , 100 , None]
+    [None, 85  , 175 , 200, 20, 100 ],
+    [85  , None, 125 , 175, 100, 160 ],
+    [172 , 125 , None, 100, 200, 250 ],
+    [200 , 175 , 100 , None, 210, 220],
+    [20, 100, 200, 210, None, 100],
+    [100, 160, 250, 220, 100, None]
     ])
 
 Graph = {}
@@ -57,4 +59,5 @@ for node in Graph_New:
 
 
 print(visited)
+# Test key is correct
 
