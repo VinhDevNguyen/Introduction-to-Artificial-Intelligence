@@ -20,7 +20,7 @@ colors = [(255,0,0), (0,255,0), (0,0,255)] # RGB color
 visited = {}
 Status = True
 for node in graph:
-        visited[node] = colors[0]
+    visited[node] = colors[0]
     for Neighbor in graph[node]:
         if Neighbor in visited:
             if(visited[Neighbor] == visited[node] == colors[0]):
