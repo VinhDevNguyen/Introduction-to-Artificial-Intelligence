@@ -1,3 +1,4 @@
+# %%
 import numpy as np
 table = np.array([
     [None, 85  , 175 , 200, 20, 100 ],
@@ -8,6 +9,7 @@ table = np.array([
     [100, 160, 250, 220, 100, None]
     ])
 
+# %%
 Graph = {}
 channel = []
 visited = {}
@@ -38,7 +40,9 @@ for dedicate in range(table.shape[0]):
 def Merge(dict1, dict2): 
     return(dict2.update(dict1)) 
 Merge(Graph,Graph_New)
+print(Graph_New)
 
+# %%
 for node in Graph_New:
     i = 0
     if channel == []:
@@ -59,5 +63,5 @@ for node in Graph_New:
 
 
 print(visited)
-# Test key is correct
+print("Số kênh ít nhất cần phát là: ",(len(channel)))
 
